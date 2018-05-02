@@ -7,9 +7,8 @@ import InProcess from "./Components/InProcess/InProcess";
 import ToDos from "./Components/ToDos/ToDos";
 import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
-import Popover from 'material-ui/Popover';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
+import {bindActionCreators} from 'redux';
+import * as mainActions from './actions/mainActions';
 
 class App extends Component {
 	handleClickAddAgenda = () => {
@@ -61,8 +60,9 @@ const mapStateToProps = (state) => ({
 	allAgendas:state.allAgendas.filter(aganda => aganda.title.includes(state.filterAgenda))
 });
 
-const mapDispatchToProps = dispatch => ({
-  addAgenda: (name) => dispatch({type: 'ADD_AGENDA', payload:name}),
-	findAgenda:(name) => dispatch({type:'FIND_AGENDA',payload:name})
-});
+function mapDispatchToProps(dispatch) {
+	return {
+		...bindActionCreators(mainActions, dispatch)
+	}
+}
 export default connect(mapStateToProps, mapDispatchToProps)(App);
