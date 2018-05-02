@@ -5,6 +5,8 @@ import './App.scss';
 import Done from "./Components/Done/Done";
 import InProcess from "./Components/InProcess/InProcess";
 import ToDos from "./Components/ToDos/ToDos";
+import Button from 'material-ui/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 class App extends Component {
   render() {
@@ -15,7 +17,10 @@ class App extends Component {
           <h1 className="App-title">Welcome to TO-DO list</h1>
         </header>
         <p>open agendas: {this.props.agenda}</p>
-        <button onClick={this.props.addAgenda}>Add Agenda</button>
+        <Button  onClick={this.props.addAgenda} variant="raised" color="primary">
+          Add Agenda
+          <AddIcon />
+        </Button>
         <div className="mainPage">
           <ToDos/>
           <InProcess/>

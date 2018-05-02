@@ -10,6 +10,7 @@ export class ToDos extends React.Component {
     return (
       <div style={{display: "flex"}}>
         <h2>Hello Todos</h2>
+
       </div>
     )
   }
