@@ -1,21 +1,36 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
-import './App.css';
+import {connect} from 'react-redux'
+import './App.scss';
+import Done from "./Components/Done/Done";
+import InProcess from "./Components/InProcess/InProcess";
+import ToDos from "./Components/ToDos/ToDos";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <img src={logo} className="App-logo" alt="logo"/>
+          <h1 className="App-title">Welcome to TO-DO list</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <p>open agendas: {this.props.agenda}</p>
+        <button onClick={this.props.addAgenda}>Add Agenda</button>
+        <div className="mainPage">
+          <ToDos/>
+          <InProcess/>
+          <Done/>
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  agenda: state.get('agenda')
+});
+
+const mapDispatchToProps = dispatch => ({
+  addAgenda: () => dispatch({type: 'ADD_AGENDA'})
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);
