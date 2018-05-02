@@ -12,21 +12,15 @@ import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
 class App extends Component {
-
-  state = {
-    open: false,
+	handleClickAddAgenda = () => {
+	  console.log('input:::',this.newAgenda.value);
+	  this.props.addAgenda(this.newAgenda.value);
+    this.newAgenda.value = ''
   };
-  handleClickButton = () => {
-    this.props.addAgenda;
-    this.setState({
-      open: true,
-    });
-  };
-  handleClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
+	handleClickFindAgenda = () => {
+		console.log('input:::',this.searchAgenda.value);
+		this.props.findAgenda(this.searchAgenda.value);
+	};
   render() {
     return (
       <div className="App">
@@ -35,33 +29,25 @@ class App extends Component {
           <h1 className="App-title">Welcome to TO-DO list</h1>
         </header>
         <p>open agendas: {this.props.agenda}</p>
-        <Button  onClick={this.handleClickButton} variant="raised" color="primary">
-          Add Agenda
-          <AddIcon />
-        </Button>
-        <Popover
-          open={this.state.open}
-          onClose={this.handleClose}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-        >
-          <Paper  elevation={4}>
-            <Typography variant="headline" component="h3">
-              This is a sheet of paper.
-            </Typography>
-            <Typography component="p">
-              Paper can be used to build surface or other elements for your application.
-            </Typography>
-          </Paper>
-        </Popover>
+	      <div>
+		      <input type="text" ref = {(input)=> {this.newAgenda = input}}/>
+		      <Button  onClick={this.handleClickAddAgenda} variant="raised" color="primary">
+			      Add Agenda
+			      <AddIcon />
+		      </Button>
+	      </div>
+	      <div>
+		      <input type="text" ref = {(input)=> {this.searchAgenda = input}}/>
+		      <Button  onClick={this.handleClickFindAgenda} variant="raised" color="primary">
+			      Filter
+			      <AddIcon />
+		      </Button>
+	      </div>
+
+
+
         <div className="mainPage">
-          <ToDos/>
+          <ToDos listAgendas = {this.props.allAgendas}/>
           <InProcess/>
           <Done/>
         </div>
@@ -71,10 +57,12 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  agenda: state.get('agenda')
+  agenda: state.agenda,
+	allAgendas:state.allAgendas.filter(aganda => aganda.title.includes(state.filterAgenda))
 });
 
 const mapDispatchToProps = dispatch => ({
-  addAgenda: () => dispatch({type: 'ADD_AGENDA'})
+  addAgenda: (name) => dispatch({type: 'ADD_AGENDA', payload:name}),
+	findAgenda:(name) => dispatch({type:'FIND_AGENDA',payload:name})
 });
 export default connect(mapStateToProps, mapDispatchToProps)(App);

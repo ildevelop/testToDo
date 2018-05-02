@@ -1,17 +1,21 @@
 import {createStore , applyMiddleware } from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension'
-import {Map} from "immutable";
 import thunk from 'redux-thunk'
 
-const initialState = Map({
+const initialState ={
   agenda: 0,
-});
+  allAgendas:[],
+  filterAgenda:''
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_AGENDA':
-      return state.update('agenda',agenda => agenda +1);
-    default:
+	    console.log('action.payload',action.payload);
+	    return {...state,agenda:state.agenda +1,allAgendas:[...state.allAgendas,{'id':state.agenda, 'title':action.payload}]};
+    case 'FIND_AGENDA':
+      return {...state,filterAgenda:action.payload}
+	    default:
       return state;
   }
 };
