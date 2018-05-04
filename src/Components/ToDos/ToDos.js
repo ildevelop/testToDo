@@ -1,4 +1,5 @@
 import React from 'react'
+import './ToDos.scss'
 
 export class ToDos extends React.Component {
   constructor() {
@@ -8,11 +9,10 @@ export class ToDos extends React.Component {
   render() {
 
     return (
-      <div style={{display: "flex"}}>
-        <h2>Hello Todos</h2>
-        {this.props.listAgendas.map((agenda ,i) => <p key ={i}>{agenda.title}</p>
+      <div className="mainToDO">
+        <h2>TO DOS</h2>
+        {this.props.listAgendas.map((agenda, i) => <div className="newTask" key={i}>{agenda.title}</div>
         )}
-
       </div>
     )
   }

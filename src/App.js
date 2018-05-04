@@ -9,15 +9,14 @@ import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
 import {bindActionCreators} from 'redux';
 import * as mainActions from './actions/mainActions';
+import {Input} from "material-ui";
 
 class App extends Component {
 	handleClickAddAgenda = () => {
-	  console.log('input:::',this.newAgenda.value);
 	  this.props.addAgenda(this.newAgenda.value);
     this.newAgenda.value = ''
   };
 	handleClickFindAgenda = () => {
-		console.log('input:::',this.searchAgenda.value);
 		this.props.findAgenda(this.searchAgenda.value);
 	};
   render() {
@@ -27,28 +26,43 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo"/>
           <h1 className="App-title">Welcome to TO-DO list</h1>
         </header>
-        <p>open agendas: {this.props.agenda}</p>
-	      <div>
-		      <input type="text" ref = {(input)=> {this.newAgenda = input}}/>
-		      <Button  onClick={this.handleClickAddAgenda} variant="raised" color="primary">
-			      Add Agenda
-			      <AddIcon />
-		      </Button>
-	      </div>
-	      <div>
-		      <input type="text" ref = {(input)=> {this.searchAgenda = input}}/>
-		      <Button  onClick={this.handleClickFindAgenda} variant="raised" color="primary">
-			      Filter
-			      <AddIcon />
-		      </Button>
-	      </div>
+        <div>
+          <p>open agendas: {this.props.agenda}</p>
+          <div className="newInputs">
+            <Input
+              defaultValue=""
+              placeholder="create new task"
+              inputRef= {(input)=> {this.newAgenda = input}}
+              inputProps={{
+                'aria-label': 'Description',
+              }}
+            />
+            <Button  onClick={this.handleClickAddAgenda} color="primary">
+              Add Agenda
+              <AddIcon />
+            </Button>
+          </div>
+          <div  className="newInputs">
+            <Input
+              defaultValue=""
+              placeholder="search by name"
+              inputRef= {(input)=> {this.searchAgenda = input}}
+              inputProps={{
+                'aria-label': 'Description',
+              }}
+            />
+            <Button  onClick={this.handleClickFindAgenda}color="primary">
+              Filter
+              <AddIcon />
+            </Button>
+          </div>
 
-
+        </div>
 
         <div className="mainPage">
           <ToDos listAgendas = {this.props.allAgendas}/>
-          <InProcess/>
-          <Done/>
+          <InProcess listAgendas = {[]}/>
+          <Done listAgendas = {[]}/>
         </div>
       </div>
     );
