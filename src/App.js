@@ -12,6 +12,9 @@ import * as mainActions from './actions/mainActions';
 import {Input} from "material-ui";
 
 class App extends Component {
+	componentWillMount(){
+		this.props.getData()
+	}
 	handleClickAddAgenda = () => {
 		this.props.addAgenda(this.newAgenda.value);
 		this.newAgenda.value = ''

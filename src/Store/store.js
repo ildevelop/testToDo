@@ -11,6 +11,9 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
+		case actionTypes.GET_DATA:
+			console.log('GET_DATA',action.mockApiData);
+			return action.mockApiData
 		case actionTypes.ADD_AGENDA:
 			return {
 				...state, agenda: state.agenda + 1,

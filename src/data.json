@@ -1,0 +1,41 @@
+{
+  "countAgendas": 7,
+  "agenda": 8,
+  "allAgendas": [
+    {
+      "id": 7,
+      "title": "deploy to production",
+      "status": "TODOS"
+    },
+    {
+      "id": 0,
+      "title": "create project",
+      "status": "DONE"
+    },
+    {
+      "id": 1,
+      "title": "install dependencies",
+      "status": "DONE"
+    },
+    {
+      "id": 4,
+      "title": "work with tests",
+      "status": "INPROCESS"
+    },
+    {
+      "id": 2,
+      "title": "connect React with Redux",
+      "status": "DONE"
+    },
+    {
+      "id": 3,
+      "title": "create React components",
+      "status": "DONE"
+    },
+    {
+      "id": 6,
+      "title": "finish UI",
+      "status": "INPROCESS"
+    }
+  ]
+}
