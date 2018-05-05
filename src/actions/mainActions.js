@@ -1,15 +1,17 @@
 import * as actionTypes from './../Store/constant';
+const mockApiData = require('./../data');
 
-const mockApiData = require('./../data')
-
+const mockDataByPromise = (dispatch) => new Promise((resolve, reject) => {
+	resolve(setTimeout(() => {
+			dispatch({
+				type: actionTypes.GET_DATA,
+				mockApiData
+			})
+		}, 1000
+	));
+});
 export function getData() {
-	return (dispatch) => setTimeout(() => {
-		dispatch({
-			type: actionTypes.GET_DATA,
-			mockApiData
-		})
-		},1000
-	)
+	return (dispatch) => mockDataByPromise(dispatch);
 }
 
 export function addAgenda(name) {
