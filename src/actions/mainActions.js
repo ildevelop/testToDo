@@ -6,9 +6,15 @@ export function addAgenda(name) {
 }
 
 export function hendleInProcess(name) {
-	console.log('hendleInProcess',name);
 	return (dispatch) => dispatch({
 		type: 'SET_INPROCESS',
+		payload: name
+	})
+}
+
+export function hendleDone(name) {
+	return (dispatch) => dispatch({
+		type: 'SET_DONE',
 		payload: name
 	})
 }

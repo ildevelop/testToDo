@@ -43,9 +43,9 @@ class App extends Component {
 				</div>
 
 				<div className="mainPage">
-					<ToDos listAgendas={this.props.allAgendas}/>
-					<InProcess listAgendas={this.props.allAgendas}/>
-					<Done listAgendas={[]}/>
+					<ToDos listAgendas={this.props.allAgendas} nextStation = "InProcess"/>
+					<InProcess listAgendas={this.props.allAgendas} nextStation = "Done"/>
+					<Done listAgendas={this.props.allAgendas} nextStation = "Delete"/>
 				</div>
 			</div>
 		);

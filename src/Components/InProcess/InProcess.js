@@ -7,7 +7,8 @@ export class InProcess extends React.Component {
 			<div>
 				<h2>IN PROCESS</h2>
 				{this.props.listAgendas ?
-					this.props.listAgendas.map((agenda, i) => {return agenda.status ==='INPROCESS' ?<TaskComponent key={agenda.id} task={agenda}/>:<div  key={agenda.id}/>})
+					this.props.listAgendas.map((agenda) => {return agenda.status ==='INPROCESS' ?
+            <TaskComponent key={agenda.id} task={agenda} nextStation = {this.props.nextStation}/>:<div  key={agenda.id}/>})
 					: <div/>
 				}
 			</div>

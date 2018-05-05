@@ -1,21 +1,19 @@
 import React from 'react'
-import './../ToDos/ToDos.scss'
+import TaskComponent from './../ToDos/TaskComponent'
 
 export class Done extends React.Component {
-  constructor() {
-    super()
-  }
-
-  render() {
-
-    return (
-      <div className="mainToDO">
-        <h2>DONE</h2>
-        {this.props.listAgendas.map((agenda, i) => <div className="newTask" key={i}>{agenda.title}</div>
-        )}
-      </div>
-    )
-  }
+	render() {
+		return (
+			<div>
+				<h2>DONE</h2>
+				{this.props.listAgendas ?
+					this.props.listAgendas.map((agenda) => {return agenda.status ==='DONE' ?
+						<TaskComponent key={agenda.id} task={agenda} nextStation = {this.props.nextStation}/>:<div  key={agenda.id}/>})
+					: <div/>
+				}
+			</div>
+		)
+	}
 }
 
 export default Done

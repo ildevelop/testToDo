@@ -19,7 +19,6 @@ const reducer = (state = initialState, action) => {
 				}]
 			};
 		case 'SET_INPROCESS':
-			console.log('store.SET_INPROCESS', action.payload);
 			let taskNew = {
 				'id': action.payload.id,
 				'title': action.payload.title,
@@ -29,6 +28,17 @@ const reducer = (state = initialState, action) => {
 			let allAgendasNew = arrD.filter(e => e.id !== action.payload.id);
 			allAgendasNew.push(taskNew)
 			return{...state, allAgendas: allAgendasNew};
+		case 'SET_DONE':
+			console.log('store.SET_DONE', action.payload);
+			let taskDone = {
+				'id': action.payload.id,
+				'title': action.payload.title,
+				'status': 'DONE'
+			};
+			let allAgendasDone = state.allAgendas;
+			let allAgendasDoneNew = allAgendasDone.filter(e => e.id !== action.payload.id);
+			allAgendasDoneNew.push(taskDone)
+			return{...state, allAgendas: allAgendasDoneNew};
 
 		default:
 			return state;

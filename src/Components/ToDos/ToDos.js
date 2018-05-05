@@ -8,7 +8,8 @@ export class ToDos extends React.Component {
 			<div>
 				<h2>TO DOS</h2>
 				{this.props.listAgendas ?
-					this.props.listAgendas.map((agenda, i) => {return agenda.status ==='TODOS' ?<TaskComponent key={agenda.id } task={agenda}/>:<div  key={agenda.id}/>})
+					this.props.listAgendas.map((agenda) => {return agenda.status ==='TODOS' ?
+						<TaskComponent key={agenda.id } task={agenda}  nextStation = {this.props.nextStation}/>:<div  key={agenda.id}/>})
 					: <div/>
 				}
 			</div>

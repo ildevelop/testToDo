@@ -10,43 +10,59 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Work from '@material-ui/icons/Work';
 import {bindActionCreators} from "redux";
 import * as mainActions from "../../actions/mainActions";
-import {ToDos} from "./ToDos";
 import {connect} from "react-redux";
 import './ToDos.scss'
 
-class TaskComponent extends React.Component{
+class TaskComponent extends React.Component {
 	handleClick = () => {
-		console.log('click',this.selected);
-		this.props.hendleInProcess(this.props.task)
+		if (this.props.nextStation === 'InProcess')
+			this.props.hendleInProcess(this.props.task)
+		else if (this.props.nextStation === 'Done')
+			this.props.hendleDone(this.props.task)
+		else
+			console.log("FINISH");
+		//TODO FINISH
+
 	}
-	render(){
+
+	render() {
 		return (
 			<div className="newTask">
 				<ExpansionPanel>
-					<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-						<Typography >{this.props.task.title}</Typography>
+					<ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+						<Typography>{this.props.task.title}</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
-						<Typography>
-							Let`s start work!! :)
-						</Typography>
-						<Button size="small" onClick={this.handleClick}color="primary">
-							InProcess
-							<Work />
-						</Button>
-						{/*<Button size="small" onClick={this.handleClickFindAgenda} style={{color: "green"}} >*/}
-						{/*Done*/}
-						{/*<Done />*/}
-						{/*</Button>*/}
+						{this.props.nextStation === 'InProcess'?
+							<Typography>
+								Let`s start work!! :)
+							</Typography>:
+							<Typography>
+								wanna FINISH? )
+							</Typography>
+						}
+
+						{
+							this.props.nextStation === 'Done' ?
+								<Button size="small" onClick={this.handleClick}style={{color: "green"}}>
+									{this.props.nextStation}
+										<Done/>
+								</Button> :
+								<Button size="small"  onClick={this.handleClick} color="primary" >
+									{this.props.nextStation}
+									<Work/>
+								</Button>
+						}
 					</ExpansionPanelDetails>
 				</ExpansionPanel>
 			</div>
 		)
 	}
 }
+
 const mapStateToProps = (state) => ({
 	agenda: state.agenda,
-	allAgendas:state.allAgendas.filter(aganda => aganda.title ==='TODOS')
+	allAgendas: state.allAgendas.filter(aganda => aganda.title === 'TODOS')
 });
 
 function mapDispatchToProps(dispatch) {
@@ -54,4 +70,5 @@ function mapDispatchToProps(dispatch) {
 		...bindActionCreators(mainActions, dispatch)
 	}
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(TaskComponent)
