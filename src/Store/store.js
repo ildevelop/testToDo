@@ -29,7 +29,6 @@ const reducer = (state = initialState, action) => {
 			allAgendasNew.push(taskNew)
 			return{...state, allAgendas: allAgendasNew};
 		case 'SET_DONE':
-			console.log('store.SET_DONE', action.payload);
 			let taskDone = {
 				'id': action.payload.id,
 				'title': action.payload.title,
@@ -39,6 +38,10 @@ const reducer = (state = initialState, action) => {
 			let allAgendasDoneNew = allAgendasDone.filter(e => e.id !== action.payload.id);
 			allAgendasDoneNew.push(taskDone)
 			return{...state, allAgendas: allAgendasDoneNew};
+		case 'DELETE_AGENDA':
+			let allAgendasDelete = state.allAgendas;
+			let allAgendasDeleteNew = allAgendasDelete.filter(e => e.id !== action.payload.id);
+			return{...state, allAgendas: allAgendasDeleteNew};
 
 		default:
 			return state;

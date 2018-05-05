@@ -18,3 +18,10 @@ export function hendleDone(name) {
 		payload: name
 	})
 }
+
+export function hendleDelete(name) {
+	return (dispatch) => dispatch({
+		type: 'DELETE_AGENDA',
+		payload: name
+	})
+}

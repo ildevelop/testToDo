@@ -20,7 +20,7 @@ class TaskComponent extends React.Component {
 		else if (this.props.nextStation === 'Done')
 			this.props.hendleDone(this.props.task)
 		else
-			console.log("FINISH");
+			this.props.hendleDelete(this.props.task)
 		//TODO FINISH
 
 	}
