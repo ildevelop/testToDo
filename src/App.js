@@ -53,7 +53,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	agenda: state.agenda,
+	agenda: state.countAgendas,
 	allAgendas: state.allAgendas
 });
 

@@ -21,8 +21,6 @@ class TaskComponent extends React.Component {
 			this.props.hendleDone(this.props.task)
 		else
 			this.props.hendleDelete(this.props.task)
-		//TODO FINISH
-
 	}
 
 	render() {
@@ -60,10 +58,7 @@ class TaskComponent extends React.Component {
 	}
 }
 
-const mapStateToProps = (state) => ({
-	agenda: state.agenda,
-	allAgendas: state.allAgendas.filter(aganda => aganda.title === 'TODOS')
-});
+const mapStateToProps = () => ({});
 
 function mapDispatchToProps(dispatch) {
 	return {
