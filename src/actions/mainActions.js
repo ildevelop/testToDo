@@ -5,9 +5,10 @@ export function addAgenda(name) {
 	})
 }
 
-export function findAgenda(name) {
+export function hendleInProcess(name) {
+	console.log('hendleInProcess',name);
 	return (dispatch) => dispatch({
-		type: 'FIND_AGENDA',
+		type: 'SET_INPROCESS',
 		payload: name
 	})
 }

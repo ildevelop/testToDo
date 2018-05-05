@@ -13,65 +13,48 @@ import {Input} from "material-ui";
 
 class App extends Component {
 	handleClickAddAgenda = () => {
-	  this.props.addAgenda(this.newAgenda.value);
-    this.newAgenda.value = ''
-  };
-	handleClickFindAgenda = () => {
-		this.props.findAgenda(this.searchAgenda.value);
+		this.props.addAgenda(this.newAgenda.value);
+		this.newAgenda.value = ''
 	};
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
-          <h1 className="App-title">Welcome to TO-DO list</h1>
-        </header>
-        <div>
-          <p>open agendas: {this.props.agenda}</p>
-          <div className="newInputs">
-            <Input
-              defaultValue=""
-              placeholder="create new task"
-              inputRef= {(input)=> {this.newAgenda = input}}
-              inputProps={{
-                'aria-label': 'Description',
-              }}
-            />
-            <Button  onClick={this.handleClickAddAgenda} color="primary">
-              Add Agenda
-              <AddIcon />
-            </Button>
-          </div>
-          <div  className="newInputs">
-            <Input
-              defaultValue=""
-              placeholder="search by name"
-              inputRef= {(input)=> {this.searchAgenda = input}}
-              inputProps={{
-                'aria-label': 'Description',
-              }}
-            />
-            <Button  onClick={this.handleClickFindAgenda}color="primary">
-              Filter
-              <AddIcon />
-            </Button>
-          </div>
 
-        </div>
+	render() {
+		return (
+			<div className="App">
+				<header className="App-header">
+					<img src={logo} className="App-logo" alt="logo"/>
+					<h1 className="App-title">Welcome to TO-DO list</h1>
+				</header>
+				<p>open agendas: {this.props.agenda}</p>
+				<div className="newInputs">
+					<Input
+						defaultValue=""
+						placeholder="create new task"
+						inputRef={(input) => {
+							this.newAgenda = input
+						}}
+						inputProps={{
+							'aria-label': 'Description',
+						}}
+					/>
+					<Button size="small" onClick={this.handleClickAddAgenda} color="primary">
+						Add Agenda
+						<AddIcon/>
+					</Button>
+				</div>
 
-        <div className="mainPage">
-          <ToDos listAgendas = {this.props.allAgendas}/>
-          <InProcess listAgendas = {[]}/>
-          <Done listAgendas = {[]}/>
-        </div>
-      </div>
-    );
-  }
+				<div className="mainPage">
+					<ToDos listAgendas={this.props.allAgendas}/>
+					<InProcess listAgendas={this.props.allAgendas}/>
+					<Done listAgendas={[]}/>
+				</div>
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = (state) => ({
-  agenda: state.agenda,
-	allAgendas:state.allAgendas.filter(aganda => aganda.title.includes(state.filterAgenda))
+	agenda: state.agenda,
+	allAgendas: state.allAgendas
 });
 
 function mapDispatchToProps(dispatch) {
@@ -79,4 +62,5 @@ function mapDispatchToProps(dispatch) {
 		...bindActionCreators(mainActions, dispatch)
 	}
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);

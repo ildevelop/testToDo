@@ -1,13 +1,11 @@
-.mainToDO{
+
+.newTask {
+  width: 250px;
   display: flex;
-  flex-direction: column;
-  .newTask{
-    display: flex;
-    background: beige;
-    padding: 10px;
-    justify-content: center;
-    border: 1px solid #61DAFB;
-    margin: 5px;
-    border-radius: 5%;
-  }
+  background: beige;
+  padding: 10px;
+  justify-content: center;
+  border: 1px solid #61DAFB;
+  margin: 5px;
+  border-radius: 5%;
 }
